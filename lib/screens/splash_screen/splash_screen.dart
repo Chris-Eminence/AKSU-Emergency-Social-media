@@ -1,5 +1,8 @@
 import 'package:aksustack/screens/sign_up_page.dart';
+import 'package:aksustack/screens/splash_screen/second_splash_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'first_splash_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -17,12 +20,15 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => SignUpPage(),
+          builder: (context) => SecondSplashScreen(),
         ),
       );
     });
   }
+
+  @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 200.0),

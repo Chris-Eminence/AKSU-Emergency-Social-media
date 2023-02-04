@@ -1,4 +1,4 @@
-import 'package:aksustack/colors/project_colors.dart';
+import 'package:aksustack/utils/project_colors.dart';
 import 'package:aksustack/drop_down_spinners/department_drop_down_list/department_list.dart';
 import 'package:aksustack/drop_down_spinners/drop_down.dart';
 import 'package:aksustack/screens/sign_in_page.dart';
@@ -29,7 +29,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 26.0,
-                      color: AppColors.greenColor,
+                      color: AppColors.primaryColor,
                     ),
                   ),
                 ),
@@ -47,13 +47,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(
                         Icons.person,
-                        color: AppColors.greenColor,
+                        color: AppColors.primaryColor,
                       ),
                       hintText: 'Full name',
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 0.0,
-                          color: AppColors.greenColor,
+                          color: AppColors.primaryColor,
                           style: BorderStyle.none,
                         ),
                         borderRadius: BorderRadius.circular(15.0),
@@ -72,14 +72,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(
                         Icons.app_registration_sharp,
-                        color: AppColors.greenColor,
+                        color: AppColors.primaryColor,
                       ),
                       hintText: 'Reg number',
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 0.0,
                           style: BorderStyle.none,
-                          color: AppColors.greenColor,
+                          color: AppColors.primaryColor,
                         ),
                         borderRadius: BorderRadius.circular(15.0),
                       ),
@@ -97,13 +97,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(
                         Icons.email,
-                        color: AppColors.greenColor,
+                        color: AppColors.primaryColor,
                       ),
                       hintText: 'Enter your email',
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 0.0,
-                          color: AppColors.greenColor,
+                          color: AppColors.primaryColor,
                           style: BorderStyle.none,
                         ),
                         borderRadius: BorderRadius.circular(15.0),
@@ -124,13 +124,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(
                         Icons.phone,
-                        color: AppColors.greenColor,
+                        color: AppColors.primaryColor,
                       ),
                       hintText: 'Phone Number',
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 0.0,
-                          color: AppColors.greenColor,
+                          color: AppColors.primaryColor,
                           style: BorderStyle.none,
                         ),
                         borderRadius: BorderRadius.circular(15.0),
@@ -151,7 +151,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     borderRadius: BorderRadius.circular(15),
                     color: Colors.white,
                     boxShadow: const [
-                      BoxShadow(color: AppColors.greenColor, spreadRadius: 1),
+                      BoxShadow(color: AppColors.primaryColor, spreadRadius: 1),
                     ],
                   ),
                   child: const DropDown(),
@@ -169,18 +169,18 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(
                         Icons.password,
-                        color: AppColors.greenColor,
+                        color: AppColors.primaryColor,
                       ),
                       suffixIcon: const Icon(
                         Icons.visibility,
-                        color: AppColors.greenColor,
+                        color: AppColors.primaryColor,
                       ),
                       hintText: 'Enter your password',
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(
                             width: 0.0,
                             style: BorderStyle.none,
-                            color: AppColors.greenColor),
+                            color: AppColors.primaryColor),
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                       filled: true,
@@ -199,18 +199,18 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(
                         Icons.password,
-                        color: AppColors.greenColor,
+                        color: AppColors.primaryColor,
                       ),
                       suffixIcon: const Icon(
                         Icons.visibility,
-                        color: AppColors.greenColor,
+                        color: AppColors.primaryColor,
                       ),
                       hintText: 'Confirm password',
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(
                             width: 0.0,
                             style: BorderStyle.none,
-                            color: AppColors.greenColor),
+                            color: AppColors.primaryColor),
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                       filled: true,
@@ -264,7 +264,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       Text(
                         'Login',
                         style: TextStyle(
-                            color: AppColors.greenColor,
+                            color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold),
                       )
                     ],

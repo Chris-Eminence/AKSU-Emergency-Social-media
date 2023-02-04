@@ -1,4 +1,4 @@
-import 'package:aksustack/colors/project_colors.dart';
+import 'package:aksustack/utils/project_colors.dart';
 import 'package:aksustack/drop_down_spinners/department_drop_down_list/department_list.dart';
 import 'package:flutter/material.dart';
 
@@ -37,7 +37,7 @@ class _DropDownState extends State<DropDown> {
           Padding(
             padding: const EdgeInsets.only(left: 10.0),
             child: Icon(
-              Icons.school, color: AppColors.greenColor,
+              Icons.school, color: AppColors.primaryColor,
             ),
           ),
       Padding(
@@ -46,11 +46,11 @@ class _DropDownState extends State<DropDown> {
         child: DropdownButton(
           iconEnabledColor: Colors.white,
           value: dropdownValue,
-          style: TextStyle(color: AppColors.greenColor, fontSize: 16),
+          style: TextStyle(color: AppColors.primaryColor, fontSize: 16),
           underline: Container(
 
             height: 0,
-            color: AppColors.greenColor,
+            color: AppColors.primaryColor,
           ),
           onChanged: (data) {
             setState(() {

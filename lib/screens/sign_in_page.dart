@@ -1,7 +1,7 @@
 import 'package:aksustack/screens/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../colors/project_colors.dart';
+import '../utils/project_colors.dart';
 import '../drop_down_spinners/drop_down.dart';
 import 'sign_up_page.dart';
 
@@ -10,6 +10,9 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -18,17 +21,25 @@ class SignInPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                  child: Text(
-                    'Welcome Back - Login',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 26.0,
-                      color: AppColors.greenColor,
-                    ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 40.0),
+                  child: Row(
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          'Hello there 👋',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30.0,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
+
                 const SizedBox(
                   height: 50.0,
                 ),
@@ -50,14 +61,14 @@ class SignInPage extends StatelessWidget {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(
                         Icons.app_registration_sharp,
-                        color: AppColors.greenColor,
+                        color: AppColors.primaryColor,
                       ),
                       hintText: 'Reg number',
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 0.0,
                           style: BorderStyle.none,
-                          color: AppColors.greenColor,
+                          color: AppColors.primaryColor,
                         ),
                         borderRadius: BorderRadius.circular(15.0),
                       ),
@@ -79,18 +90,18 @@ class SignInPage extends StatelessWidget {
                     decoration: InputDecoration(
                       prefixIcon: const Icon(
                         Icons.password,
-                        color: AppColors.greenColor,
+                        color: AppColors.primaryColor,
                       ),
                       suffixIcon: const Icon(
                         Icons.visibility,
-                        color: AppColors.greenColor,
+                        color: AppColors.primaryColor,
                       ),
                       hintText: 'Enter your password',
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(
                             width: 0.0,
                             style: BorderStyle.none,
-                            color: AppColors.greenColor),
+                            color: AppColors.primaryColor),
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                       filled: true,
@@ -101,14 +112,14 @@ class SignInPage extends StatelessWidget {
 
 
                 SizedBox(
-                  height: size.height * 0.02,
+                  height: 60.0,
                 ),
 
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 90.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: SizedBox(
-                    width: size.width,
-                    height: size.height * 0.05,
+                    width: screenWidth,
+                    height: screenHeight / 14.7,
                     child: TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -121,13 +132,13 @@ class SignInPage extends StatelessWidget {
                       style: ButtonStyle(
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(55.0)),
+                                borderRadius: BorderRadius.circular(15.0)),
                           ),
                           backgroundColor: MaterialStateProperty.all(
                               const Color(0xFF0E693E))),
                       child: const Text(
                         'Login',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: AppColors.white, fontSize: 24.0),
                       ),
                     ),
                   ),
@@ -142,11 +153,11 @@ class SignInPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Text('Don\'t have an account yet? '),
+                      Text('Don\'t have an account yet? ', style: TextStyle(fontSize: 18),),
                       Text(
                         'Sign up',
-                        style: TextStyle(
-                            color: AppColors.greenColor,
+                        style: TextStyle(fontSize: 18.0,
+                            color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold),
                       )
                     ],
