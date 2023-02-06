@@ -15,10 +15,7 @@ class FinalSplashScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      body: SafeArea(
-        child: Center(
+    return Center(
           child: Padding(
             padding: EdgeInsets.only(
               top: screenHeight / 95,
@@ -102,8 +99,6 @@ class FinalSplashScreen extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
     );
   }
 }

@@ -19,9 +19,7 @@ class SecondSplashScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
+    return Center(
           child: Padding(
             padding: EdgeInsets.only(
               top: screenHeight / 95,
@@ -68,8 +66,7 @@ class SecondSplashScreen extends StatelessWidget {
               ],
             ),
           ),
-        ),
-      ),
     );
+
   }
 }
