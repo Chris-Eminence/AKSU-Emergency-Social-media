@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "780217844897",
+    "project_id": "campus-safe-zone",
+    "storage_bucket": "campus-safe-zone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:780217844897:android:c97c844ee2a3bbf8eb5ce0",
+        "android_client_info": {
+          "package_name": "com.example.aksustack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "780217844897-nj7hpu7ochrfnqqsjdg2g90gv70m9kot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYSNW43D4yo2yw7m0DcEI0iRcQRRn9c_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "780217844897-nj7hpu7ochrfnqqsjdg2g90gv70m9kot.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "780217844897-p4pv0qddkk4o4155rrbrloal5at07c22.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aksustack"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

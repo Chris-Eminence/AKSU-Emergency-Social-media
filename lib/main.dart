@@ -1,9 +1,12 @@
 import 'package:aksustack/screens/forget_password.dart';
 import 'package:aksustack/screens/onboarding_screen.dart';
 import 'package:aksustack/screens/splash_screen/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
