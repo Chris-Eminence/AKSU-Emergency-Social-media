@@ -1,5 +1,6 @@
 import 'package:aksustack/screens/forget_password.dart';
 import 'package:aksustack/screens/onboarding_screen.dart';
+import 'package:aksustack/screens/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Fiddle',
       theme: ThemeData(
       ),
-      home: const OnBoardingPage(),
+      home: const SplashScreen(),
     );
   }
 }

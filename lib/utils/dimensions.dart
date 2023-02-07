@@ -1,13 +1,22 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-class Dimension {
+class Dimension extends StatefulWidget {
+  const Dimension({Key? key}) : super(key: key);
+
+  @override
+  State<Dimension> createState() => _DimensionState();
+}
+
+class _DimensionState extends State<Dimension> {
 
 
+  @override
+  Widget build(BuildContext context) {
 
-  static double screenHeight = Get.context!.height;
-  static double screenWidth = Get.context!.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
 
-  static double firstSplashScreenTopPadding = screenHeight / 9.29;
+    return Container();
+  }
 }

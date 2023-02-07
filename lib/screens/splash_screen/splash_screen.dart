@@ -1,3 +1,4 @@
+import 'package:aksustack/screens/onboarding_screen.dart';
 import 'package:aksustack/screens/sign_up_page.dart';
 import 'package:aksustack/screens/splash_screen/second_splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,11 +17,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(milliseconds: 2000), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => SecondSplashScreen(),
+          builder: (context) => OnBoardingPage(),
         ),
       );
     });

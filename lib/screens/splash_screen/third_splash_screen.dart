@@ -23,29 +23,33 @@ class ThirdSplashScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(
-                    children: const [
-                      Text(
-                        'Record and share',
-                        style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 36.0,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      Text(
-                        'on the go',
-                        style: TextStyle(
-                            color: AppColors.secondaryColor,
-                            fontSize: 36.0,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      Image(
-                        image: AssetImage('images/onbording_image_three.png'),
-                      ),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.only(top: screenHeight /12.5),
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Record and share',
+                          style: TextStyle(
+                              color: AppColors.black,
+                              fontSize: 36.0,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        const Text(
+                          'on the go',
+                          style: const TextStyle(
+                              color: AppColors.secondaryColor,
+                              fontSize: 36.0,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        const SizedBox(
+                          height: 20.0,
+                        ),
+                        Image(
+                          height: screenHeight / 2.25, width: screenWidth /1.05,
+                          image: const AssetImage('images/res.png'),
+                        ),
+                      ],
+                    ),
                   ),
                   Column(
                     children: const [

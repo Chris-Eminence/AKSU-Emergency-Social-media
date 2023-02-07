@@ -1,3 +1,5 @@
+import 'package:aksustack/screens/sign_in_page.dart';
+import 'package:aksustack/screens/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/project_colors.dart';
@@ -15,7 +17,10 @@ class FinalSplashScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return Center(
+    return Scaffold(
+      backgroundColor: AppColors.white,
+      body: SafeArea(
+        child: Center(
           child: Padding(
             padding: EdgeInsets.only(
               top: screenHeight / 95,
@@ -38,14 +43,21 @@ class FinalSplashScreen extends StatelessWidget {
                         width: screenWidth,
                         height: screenHeight  / 16.9,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                builder: (context) => const SignUpPage(),
+                                )
+                            );
+                          },
                           style: ButtonStyle(
                               elevation: MaterialStateProperty.all(5.0),
                               shadowColor: MaterialStateProperty.all(AppColors.primaryColorShade),
 
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0)),
+                                    borderRadius: BorderRadius.circular(60.0)),
                               ),
                               backgroundColor: MaterialStateProperty.all(
                                   AppColors.primaryColor)),
@@ -63,13 +75,19 @@ class FinalSplashScreen extends StatelessWidget {
                         width: screenWidth,
                         height: screenHeight  / 16.9,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                builder: (context) => SignInPage(),
+                            ));
+                          },
                           style: ButtonStyle(
                               elevation: MaterialStateProperty.all(5.0),
                               shadowColor: MaterialStateProperty.all(AppColors.primaryColorShade),
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0)),
+                                    borderRadius: BorderRadius.circular(60.0)),
                               ),
                               backgroundColor: MaterialStateProperty.all(
                                   AppColors.white)),
@@ -99,6 +117,8 @@ class FinalSplashScreen extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
     );
   }
 }

@@ -118,8 +118,8 @@ class SignInPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: SizedBox(
-                    width: screenWidth,
-                    height: screenHeight / 14.7,
+                    width: size.width,
+                    height: size.height * 0.05,
                     child: TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -132,13 +132,13 @@ class SignInPage extends StatelessWidget {
                       style: ButtonStyle(
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0)),
+                                borderRadius: BorderRadius.circular(60.0)),
                           ),
                           backgroundColor: MaterialStateProperty.all(
                               const Color(0xFF0E693E))),
                       child: const Text(
                         'Login',
-                        style: TextStyle(color: AppColors.white, fontSize: 24.0),
+                        style: TextStyle(color: AppColors.white, fontSize: 18.0),
                       ),
                     ),
                   ),

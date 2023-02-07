@@ -1,3 +1,4 @@
+
 import 'package:aksustack/screens/splash_screen/final_splash_screen.dart';
 import 'package:aksustack/screens/splash_screen/first_splash_screen.dart';
 import 'package:aksustack/screens/splash_screen/second_splash_screen.dart';
@@ -5,7 +6,7 @@ import 'package:aksustack/screens/splash_screen/third_splash_screen.dart';
 import 'package:aksustack/utils/project_colors.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({Key? key}) : super(key: key);
@@ -24,60 +25,115 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       color: AppColors.white,
       child: const FirstSplashScreen(),
     ),
-    Container(color: AppColors.white, child: const SecondSplashScreen(),),
+    Container(
+      color: AppColors.white,
+      child: const SecondSplashScreen(),
+    ),
     Container(
       color: AppColors.white,
       child: const ThirdSplashScreen(),
     ),
-    Container(
-      color: AppColors.white,
-      child: const FinalSplashScreen(),
-    ),
+
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController.addListener(() {
+      setState((){
+
+      });
+    });
+  }
 
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
   }
+  _onchanged(int index) {
+    setState(() {
+      activePage = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    var currPageValue = 0.0;
+
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Column(
         children: [
           Expanded(
             child: PageView.builder(
+              scrollDirection: Axis.horizontal,
+              onPageChanged: _onchanged,
               controller: _pageController,
-              onPageChanged: (int page){
-                setState((){
-                  activePage = page;
-                });
-              },
               itemCount: pages.length,
-              itemBuilder: (BuildContext context, int index){
-                return pages[index % pages.length];
+              itemBuilder: (context, int index) {
+                return pages[index];
               },
-
             ),
           ),
-          // Text(activePage.toString()),
 
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: DotsIndicator(
-              dotsCount: pages.length,
-              position: activePage.toDouble(),
-              decorator: DotsDecorator(
 
-                size: const Size.square(9.0),
-                activeSize: const Size(18.0, 9.0),
-                activeShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0)),
-              ),
+          Container(
+            color: AppColors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List<Widget>.generate(pages.length, (int index) {
+                      return AnimatedContainer(
+                          duration: Duration(milliseconds: 300),
+                          height: 10,
+                          width: (index == activePage) ? 30 : 10,
+                          margin:
+                          EdgeInsets.symmetric(horizontal: 5, vertical: 30),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: (index == activePage)
+                                  ? AppColors.primaryColor
+                                  : AppColors.secondaryColor ));
+                    })),
+                InkWell(
+                  onTap: () {
+                    if (activePage == pages.length - 1) {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => FinalSplashScreen()));
+                    } else {
+                      _pageController.nextPage(duration: Duration(milliseconds: 800), curve: Curves.easeInOutQuint);
+                    }
+                  },
+
+                  child: AnimatedContainer(
+                    alignment: Alignment.center,
+                    duration: Duration(milliseconds: 300),
+                    height: screenHeight  / 16.9,
+                    width: (activePage == (pages.length - 1)) ? 200 : 75,
+                    decoration: BoxDecoration(
+                        color: AppColors.primaryColor,
+                        borderRadius: BorderRadius.circular(60)),
+                    child: (activePage == (pages.length - 1)) ? const Text("Get Started",
+                      style: TextStyle(
+                        color: AppColors.white,
+                        fontSize: 20,
+                      ),
+                    )
+                        : const Icon(
+                      Icons.navigate_next,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: 20,),
+
+              ],
             ),
-          )
+          ),
         ],
       ),
     );
