@@ -1,5 +1,5 @@
 import 'package:aksustack/screens/onboarding_screen.dart';
-import 'package:aksustack/screens/sign_up_page.dart';
+import 'package:aksustack/screens/register_page.dart';
 import 'package:aksustack/screens/splash_screen/second_splash_screen.dart';
 import 'package:flutter/material.dart';
 

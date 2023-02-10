@@ -1,5 +1,5 @@
-import 'package:aksustack/screens/sign_in_page.dart';
-import 'package:aksustack/screens/sign_up_page.dart';
+import 'package:aksustack/screens/login_page.dart';
+import 'package:aksustack/screens/register_page.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/project_colors.dart';
@@ -47,7 +47,7 @@ class FinalSplashScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                builder: (context) => const SignUpPage(),
+                                builder: (context) => const RegisterPage(),
                                 )
                             );
                           },
@@ -79,7 +79,7 @@ class FinalSplashScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                builder: (context) => SignInPage(),
+                                builder: (context) => LoginPage(),
                             ));
                           },
                           style: ButtonStyle(
