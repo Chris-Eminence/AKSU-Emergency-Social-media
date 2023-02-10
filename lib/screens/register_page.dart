@@ -231,6 +231,23 @@ class _RegisterPageState extends State<RegisterPage> {
                             // );
                           } else {
                             print('PassWord mismatched');
+                            showDialog(context: context, builder: (BuildContext context){
+                              return AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                              title: Text('Password mismatched'),
+                                content: const Text('Password mismatched'),
+                                actions: [
+                                  FlatButton(
+                                    child: Text('Try again'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
 
 
                           }
