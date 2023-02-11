@@ -1,10 +1,14 @@
+import 'dart:typed_data';
+
 import 'package:aksustack/resources/auth_method.dart';
+import 'package:aksustack/utils/image_utils.dart';
 import 'package:aksustack/utils/project_colors.dart';
 import 'package:aksustack/drop_down_spinners/department_drop_down_list/department_list.dart';
 import 'package:aksustack/drop_down_spinners/drop_down.dart';
 import 'package:aksustack/screens/login_page.dart';
 import 'package:aksustack/utils/widgets/text_input_field.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -21,6 +25,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _confirmPasswordTextController =
       TextEditingController();
   TextEditingController _regNoTextController = TextEditingController();
+  Uint8List? _profileImage;
 
   @override
   void dispose() {
@@ -31,6 +36,14 @@ class _RegisterPageState extends State<RegisterPage> {
     _phoneNumberTextController.dispose();
     _regNoTextController.dispose();
     _confirmPasswordTextController.dispose();
+  }
+
+  void selectImage() async {
+    Uint8List image = await pickImage(ImageSource.gallery);
+
+    setState(() {
+      _profileImage = image;
+    });
   }
 
   @override
@@ -48,11 +61,17 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 Stack(
                   children: [
-                    const CircleAvatar(
-                      radius: 64,
-                      backgroundColor: AppColors.white,
-                      backgroundImage: AssetImage('images/user_avaterr.png'),
-                    ),
+                    _profileImage != null
+                        ? CircleAvatar(
+                            radius: 64,
+                            backgroundColor: AppColors.white,
+                            backgroundImage: MemoryImage(_profileImage!))
+                        : const CircleAvatar(
+                            radius: 64,
+                            backgroundColor: AppColors.white,
+                            backgroundImage:
+                                AssetImage('images/user_avaterr.png'),
+                          ),
                     Positioned(
                       bottom: 0,
                       left: 90,
@@ -208,20 +227,20 @@ class _RegisterPageState extends State<RegisterPage> {
                     height: size.height * 0.05,
                     child: TextButton(
                       onPressed: () async {
-                        setState(()  async {
+                        setState(() async {
                           if (_passwordTextController.text ==
-                              _confirmPasswordTextController.text)  {
-                            String result = await AuthenticationClass()
-                                .registerUser(
-                                fullName: _fullNameTextController.text,
-                                regNo: _regNoTextController.text,
-                                emailAddress:
-                                _emailAddressTextController.text,
-                                phoneNumber: _phoneNumberTextController.text,
-                                password:
-                                _confirmPasswordTextController.text);
+                              _confirmPasswordTextController.text) {
+                            String result =
+                                await AuthenticationClass().registerUser(
+                              fullName: _fullNameTextController.text,
+                              regNo: _regNoTextController.text,
+                              emailAddress: _emailAddressTextController.text,
+                              phoneNumber: _phoneNumberTextController.text,
+                              password: _confirmPasswordTextController.text,
+                            );
 
-                            print('this is the result of the firebaseQuery $result');
+                            print(
+                                'this is the result of the firebaseQuery $result');
 
                             // Navigator.push(
                             //   context,
@@ -231,25 +250,25 @@ class _RegisterPageState extends State<RegisterPage> {
                             // );
                           } else {
                             print('PassWord mismatched');
-                            showDialog(context: context, builder: (BuildContext context){
-                              return AlertDialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                              title: Text('Password mismatched'),
-                                content: const Text('Password mismatched'),
-                                actions: [
-                                  FlatButton(
-                                    child: Text('Try again'),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  ),
-                                ],
-                              );
-                            });
-
-
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                    title: Text('Password mismatched'),
+                                    content: const Text('Password mismatched'),
+                                    actions: [
+                                      FlatButton(
+                                        child: Text('Try again'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
                           }
                         });
                       },
