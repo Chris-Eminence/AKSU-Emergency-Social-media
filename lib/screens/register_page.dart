@@ -70,13 +70,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             radius: 64,
                             backgroundColor: AppColors.white,
                             backgroundImage:
-                                AssetImage('images/user_avaterr.png'),
+                                NetworkImage('https://winaero.com/blog/wp-content/uploads/2018/08/Windows-10-user-icon-big.png'),
                           ),
                     Positioned(
                       bottom: 0,
                       left: 90,
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: selectImage,
                         icon: const Icon(
                           Icons.add_a_photo,
                         ),
