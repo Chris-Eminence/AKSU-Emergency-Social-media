@@ -10,11 +10,11 @@ class DropDown extends StatefulWidget {
 }
 
 class _DropDownState extends State<DropDown> {
-  String dropdownValue = 'Department';
+  String? departmentsDropdownValue ;
 
 
   List <String> spinnerItems = [
-    'Department',
+
     'Mechanical Engineering',
     'Physics Education',
     'Chemistry Education',
@@ -34,8 +34,8 @@ class _DropDownState extends State<DropDown> {
 
 
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10.0),
+          const Padding(
+            padding: EdgeInsets.only(left: 10.0),
             child: Icon(
               Icons.school, color: AppColors.primaryColor,
             ),
@@ -44,9 +44,10 @@ class _DropDownState extends State<DropDown> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
 
         child: DropdownButton(
+          hint: const Text('Select your department'),
           iconEnabledColor: Colors.white,
-          value: dropdownValue,
-          style: TextStyle(color: AppColors.primaryColor, fontSize: 16),
+          value: departmentsDropdownValue,
+          style: const TextStyle(color: AppColors.primaryColor, fontSize: 16),
           underline: Container(
 
             height: 0,
@@ -54,7 +55,7 @@ class _DropDownState extends State<DropDown> {
           ),
           onChanged: (data) {
             setState(() {
-              dropdownValue = data.toString();
+              departmentsDropdownValue = data.toString();
             });
           },
           items: spinnerItems.map<DropdownMenuItem<String>>((String value) {

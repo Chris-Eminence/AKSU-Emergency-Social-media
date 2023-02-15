@@ -26,6 +26,9 @@ class _RegisterPageState extends State<RegisterPage> {
       TextEditingController();
   TextEditingController _regNoTextController = TextEditingController();
   Uint8List? _profileImage;
+  bool _isLoading = false;
+
+  // Str ing? departmentsDropdownValue;
 
   @override
   void dispose() {
@@ -44,6 +47,36 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {
       _profileImage = image;
     });
+  }
+
+  void registerUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String result = await AuthenticationClass().registerUser(
+      fullName: _fullNameTextController.text,
+      regNo: _regNoTextController.text,
+      emailAddress: _emailAddressTextController.text,
+      phoneNumber: _phoneNumberTextController.text,
+      password: _confirmPasswordTextController.text,
+      file: _profileImage!,
+      // department: departmentsDropdownValue!,
+    );
+    setState(() {
+      _isLoading = false;
+    });
+    if (result != 'success') {
+      showSnackBar(result, context);
+    } else {
+      //
+    }
+
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => const LoginPage(),
+    //   ),
+    // );
   }
 
   @override
@@ -69,8 +102,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         : const CircleAvatar(
                             radius: 64,
                             backgroundColor: AppColors.white,
-                            backgroundImage:
-                                NetworkImage('https://winaero.com/blog/wp-content/uploads/2018/08/Windows-10-user-icon-big.png'),
+                            backgroundImage: NetworkImage(
+                                'https://winaero.com/blog/wp-content/uploads/2018/08/Windows-10-user-icon-big.png'),
                           ),
                     Positioned(
                       bottom: 0,
@@ -210,7 +243,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: TextInputWidget(
                       textEditingController: _confirmPasswordTextController,
                       hintText: 'Confirm password',
-                      prefixIcon: Icon(
+                      prefixIcon: const Icon(
                         Icons.password,
                         color: AppColors.primaryColor,
                       ),
@@ -221,69 +254,31 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 90.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 90.0),
                   child: SizedBox(
                     width: size.width,
                     height: size.height * 0.05,
-                    child: TextButton(
-                      onPressed: () async {
-                        setState(() async {
-                          if (_passwordTextController.text ==
-                              _confirmPasswordTextController.text) {
-                            String result =
-                                await AuthenticationClass().registerUser(
-                              fullName: _fullNameTextController.text,
-                              regNo: _regNoTextController.text,
-                              emailAddress: _emailAddressTextController.text,
-                              phoneNumber: _phoneNumberTextController.text,
-                              password: _confirmPasswordTextController.text,
-                            );
-
-                            print(
-                                'this is the result of the firebaseQuery $result');
-
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => const LoginPage(),
-                            //   ),
-                            // );
-                          } else {
-                            print('PassWord mismatched');
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                    ),
-                                    title: Text('Password mismatched'),
-                                    content: const Text('Password mismatched'),
-                                    actions: [
-                                      FlatButton(
-                                        child: Text('Try again'),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                });
-                          }
-                        });
-                      },
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(55.0)),
+                    child: _isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.primaryColor,
+                            ),
+                          )
+                        : TextButton(
+                            onPressed: registerUser,
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(55.0)),
+                                ),
+                                backgroundColor: MaterialStateProperty.all(
+                                    const Color(0xFF0E693E))),
+                            child: const Text(
+                              'Register',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color(0xFF0E693E))),
-                      child: const Text(
-                        'Register',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
                   ),
                 ),
 
