@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-
 import 'package:aksustack/resources/auth_method.dart';
 import 'package:aksustack/utils/image_utils.dart';
 import 'package:aksustack/utils/project_colors.dart';
@@ -17,13 +16,16 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
+/*
+  Storing the department item to firebase and also confirm password feature
+ */
+
 class _RegisterPageState extends State<RegisterPage> {
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailAddressTextController = TextEditingController();
   TextEditingController _phoneNumberTextController = TextEditingController();
   TextEditingController _fullNameTextController = TextEditingController();
-  TextEditingController _confirmPasswordTextController =
-      TextEditingController();
+  TextEditingController _confirmPasswordTextController = TextEditingController();
   TextEditingController _regNoTextController = TextEditingController();
   Uint8List? _profileImage;
   bool _isLoading = false;
@@ -58,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
       regNo: _regNoTextController.text,
       emailAddress: _emailAddressTextController.text,
       phoneNumber: _phoneNumberTextController.text,
-      password: _confirmPasswordTextController.text,
+      password: _passwordTextController.text,
       file: _profileImage!,
       // department: departmentsDropdownValue!,
     );
@@ -193,7 +195,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       textEditingController: _phoneNumberTextController,
                       hintText: 'phone number',
                       prefixIcon:
-                          Icon(Icons.phone, color: AppColors.primaryColor),
+                          const Icon(Icons.phone, color: AppColors.primaryColor),
                       textInputType: TextInputType.phone),
                 ),
 
@@ -222,13 +224,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: TextInputWidget(
+                    obscureText: true,
                     textEditingController: _passwordTextController,
                     hintText: 'password',
                     prefixIcon: const Icon(
                       Icons.password,
                       color: AppColors.primaryColor,
                     ),
-                    suffixIcon: Icon(Icons.visibility),
+                    suffixIcon: const Icon(Icons.visibility),
                     textInputType: TextInputType.visiblePassword,
                   ),
                 ),
@@ -237,28 +240,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: size.height * 0.02,
                 ),
 
-                //-- Confirm Password TextField --
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextInputWidget(
-                      textEditingController: _confirmPasswordTextController,
-                      hintText: 'Confirm password',
-                      prefixIcon: const Icon(
-                        Icons.password,
-                        color: AppColors.primaryColor,
-                      ),
-                      textInputType: TextInputType.visiblePassword),
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-
+                //-- Button Widget
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 90.0),
                   child: SizedBox(
                     width: size.width,
                     height: size.height * 0.05,
                     child: _isLoading
+
+                    //-- Circular progress bar Ternary condition operator
                         ? const Center(
                             child: CircularProgressIndicator(
                               color: AppColors.primaryColor,
@@ -267,13 +257,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         : TextButton(
                             onPressed: registerUser,
                             style: ButtonStyle(
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(55.0)),
-                                ),
-                                backgroundColor: MaterialStateProperty.all(
-                                    const Color(0xFF0E693E))),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(55.0)),
+                              ),
+                              backgroundColor: MaterialStateProperty.all(
+                                const Color(0xFF0E693E),
+                              ),
+                            ),
                             child: const Text(
                               'Register',
                               style: TextStyle(color: Colors.white),

@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:typed_data';
 import 'package:aksustack/utils/storage_method.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ class AuthenticationClass {
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-
 
 
   // register user
@@ -25,27 +25,32 @@ class AuthenticationClass {
     String result = 'Some error occurred';
     try {
       if (fullName.isNotEmpty || regNo.isNotEmpty || emailAddress.isNotEmpty ||
-          phoneNumber.isNotEmpty || password.isNotEmpty ) {
+          phoneNumber.isNotEmpty || password.isNotEmpty) {
 
-        //registering User here
+        /*
+        Registering the user
+         */
         UserCredential userCredential = await _firebaseAuth
-            .createUserWithEmailAndPassword(email: emailAddress, password: password);
+            .createUserWithEmailAndPassword(
+            email: emailAddress, password: password);
 
 
-        String profilePhotoUrl = await StorageMethods().uploadImageToStorage('profilePicture', file, false);
+        String profilePhotoUrl = await StorageMethods().uploadImageToStorage(
+            'profilePicture', file, false);
 
         print(userCredential.user!.uid);
 
         //Storing user into database
-        await  _firebaseFirestore.collection('users').doc(userCredential.user!.uid).set({
-          'fullname' : fullName,
-          'uid' : userCredential.user!.uid,
-          'emailAddress' : emailAddress,
-          'regNo' : regNo,
-          'followers' : [],
-          'following' : [],
-          'phoneNo' : phoneNumber,
-          'photoUrl' : profilePhotoUrl
+        await _firebaseFirestore.collection('users').doc(
+            userCredential.user!.uid).set({
+          'fullname': fullName,
+          'uid': userCredential.user!.uid,
+          'emailAddress': emailAddress,
+          'regNo': regNo,
+          'followers': [],
+          'following': [],
+          'phoneNo': phoneNumber,
+          'photoUrl': profilePhotoUrl
           // 'department' : department,
           // 'profilePhotoUrl' : profilePhotoUrl
         });
@@ -62,10 +67,10 @@ class AuthenticationClass {
 
         result = 'success';
       }
-    } on FirebaseAuthException catch(auth_error){
-      if (auth_error.code == 'invalid-email'){
+    } on FirebaseAuthException catch (auth_error) {
+      if (auth_error.code == 'invalid-email') {
         result = 'the email is badly formatted';
-      }else if (auth_error == 'weak-password'){
+      } else if (auth_error == 'weak-password') {
         result = 'Password should be at least 6 characters';
       }
     }
@@ -73,5 +78,28 @@ class AuthenticationClass {
       result = error.toString();
     }
     return result;
+  }
+
+
+/*
+Login in the user
+ */
+
+  Future<String> loginUser({
+    required String email, required String password
+  }) async {
+    String loginResult = "Some error occurred";
+
+    try {
+      if (email.isNotEmpty || password.isNotEmpty) {
+        await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
+        loginResult = "Login Successfully";
+      }else{
+        loginResult = "Email or Password cannot be blank";
+      }
+    } catch (loginError) {
+        loginError.toString();
+    }
+    return loginResult;
   }
 }

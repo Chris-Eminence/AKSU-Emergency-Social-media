@@ -7,6 +7,7 @@ class TextInputWidget extends StatelessWidget {
   final String hintText;
   final Icon prefixIcon;
   final Icon? suffixIcon;
+  final bool? obscureText;
   final TextInputType textInputType;
 
   const TextInputWidget({
@@ -14,6 +15,7 @@ class TextInputWidget extends StatelessWidget {
     required this.hintText,
     required this.prefixIcon,
     this.suffixIcon,
+    this.obscureText = false,
     required this.textInputType,
   }) : super(key: key);
 
@@ -21,6 +23,7 @@ class TextInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
 
+      obscureText: obscureText!,
       controller:textEditingController,
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
@@ -38,7 +41,7 @@ class TextInputWidget extends StatelessWidget {
         ),
 
       ),
-      keyboardType: textInputType,
+
     );
   }
 }

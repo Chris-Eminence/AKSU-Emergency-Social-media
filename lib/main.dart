@@ -1,4 +1,5 @@
 import 'package:aksustack/screens/forget_password.dart';
+import 'package:aksustack/screens/login_page.dart';
 import 'package:aksustack/screens/onboarding_screen.dart';
 import 'package:aksustack/screens/register_page.dart';
 import 'package:aksustack/screens/splash_screen/splash_screen.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Fiddle',
       theme: ThemeData(
       ),
-      home: const RegisterPage(),
+      home: const LoginPage(),
     );
   }
 }

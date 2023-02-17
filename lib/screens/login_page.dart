@@ -1,12 +1,42 @@
 import 'package:aksustack/screens/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../resources/auth_method.dart';
+import '../utils/image_utils.dart';
 import '../utils/project_colors.dart';
 import '../drop_down_spinners/drop_down.dart';
+import '../utils/widgets/text_input_field.dart';
 import 'register_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _emailAddressTextController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailAddressTextController.dispose();
+    _passwordTextController.dispose();
+  }
+
+  void loginUser() async {
+    String loginResult = await AuthenticationClass().loginUser(
+        email: _emailAddressTextController.text,
+        password: _passwordTextController.text);
+
+    if (loginResult == "success") {
+
+    }else {
+      showSnackBar(loginResult, context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,60 +83,40 @@ class LoginPage extends StatelessWidget {
                   height: size.height * 0.02,
                 ),
 
-                // Registration Number
+               /*
+               Email Address TextField
+                */
 
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextField(
-                    decoration: InputDecoration(
+                  child: TextInputWidget(
+                      textEditingController: _emailAddressTextController,
+                      hintText: 'Email address',
                       prefixIcon: const Icon(
-                        Icons.app_registration_sharp,
+                        Icons.email,
                         color: AppColors.primaryColor,
                       ),
-                      hintText: 'Reg number',
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 0.0,
-                          style: BorderStyle.none,
-                          color: AppColors.primaryColor,
-                        ),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
-                  ),
+                      textInputType: TextInputType.emailAddress),
                 ),
                 SizedBox(
                   height: size.height * 0.02,
                 ),
 
-
-                // Password Text Field
+                /*
+               Password Address TextField
+                */
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextField(
+                  child: TextInputWidget(
                     obscureText: true,
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(
-                        Icons.password,
-                        color: AppColors.primaryColor,
-                      ),
-                      suffixIcon: const Icon(
-                        Icons.visibility,
-                        color: AppColors.primaryColor,
-                      ),
-                      hintText: 'Enter your password',
-                      border: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            width: 0.0,
-                            style: BorderStyle.none,
-                            color: AppColors.primaryColor),
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
+                    textEditingController: _passwordTextController,
+                    hintText: 'password',
+                    prefixIcon: const Icon(
+                      Icons.password,
+                      color: AppColors.primaryColor,
                     ),
+                    suffixIcon: const Icon(Icons.visibility),
+                    textInputType: TextInputType.visiblePassword,
                   ),
                 ),
 
@@ -121,14 +131,7 @@ class LoginPage extends StatelessWidget {
                     width: size.width,
                     height: size.height * 0.05,
                     child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Homepage(),
-                          ),
-                        );
-                      },
+                      onPressed: loginUser,
                       style: ButtonStyle(
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
