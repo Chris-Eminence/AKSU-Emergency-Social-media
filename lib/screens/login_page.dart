@@ -27,14 +27,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void loginUser() async {
-    String loginResult = await AuthenticationClass().loginUser(
+    String result = await AuthenticationClass().loginUser(
         email: _emailAddressTextController.text,
         password: _passwordTextController.text);
 
-    if (loginResult == "success") {
+    if (result == "success") {
 
     }else {
-      showSnackBar(loginResult, context);
+      showSnackBar(result, context);
     }
   }
 
@@ -120,8 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
 
-
-                SizedBox(
+                const SizedBox(
                   height: 60.0,
                 ),
 

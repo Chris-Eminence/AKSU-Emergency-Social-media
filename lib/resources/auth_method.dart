@@ -88,18 +88,18 @@ Login in the user
   Future<String> loginUser({
     required String email, required String password
   }) async {
-    String loginResult = "Some error occurred";
+    String result = "Some error occurred";
 
     try {
       if (email.isNotEmpty || password.isNotEmpty) {
         await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-        loginResult = "Login Successfully";
+        result = "Login Successfully";
       }else{
-        loginResult = "Email or Password cannot be blank";
+        result = "Email or Password cannot be blank";
       }
-    } catch (loginError) {
-        loginError.toString();
+    } catch (error) {
+        error.toString();
     }
-    return loginResult;
+    return result;
   }
 }
