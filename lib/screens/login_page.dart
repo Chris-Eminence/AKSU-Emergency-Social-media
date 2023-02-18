@@ -16,6 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool _isLoading = false;
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailAddressTextController = TextEditingController();
 
@@ -27,20 +28,24 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void loginUser() async {
+    setState(() {
+      _isLoading = true;
+    });
     String result = await AuthenticationClass().loginUser(
         email: _emailAddressTextController.text,
         password: _passwordTextController.text);
 
     if (result == "success") {
-
-    }else {
+    } else {
       showSnackBar(result, context);
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     Size size = MediaQuery.of(context).size;
@@ -83,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: size.height * 0.02,
                 ),
 
-               /*
+                /*
                Email Address TextField
                 */
 
@@ -129,20 +134,28 @@ class _LoginPageState extends State<LoginPage> {
                   child: SizedBox(
                     width: size.width,
                     height: size.height * 0.05,
-                    child: TextButton(
-                      onPressed: loginUser,
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(60.0)),
+                    child: _isLoading
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.primaryColor,
+                            ),
+                          )
+                        : TextButton(
+                            onPressed: loginUser,
+                            style: ButtonStyle(
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(60.0)),
+                                ),
+                                backgroundColor: MaterialStateProperty.all(
+                                    const Color(0xFF0E693E))),
+                            child: const Text(
+                              'Login',
+                              style: TextStyle(
+                                  color: AppColors.white, fontSize: 18.0),
+                            ),
                           ),
-                          backgroundColor: MaterialStateProperty.all(
-                              const Color(0xFF0E693E))),
-                      child: const Text(
-                        'Login',
-                        style: TextStyle(color: AppColors.white, fontSize: 18.0),
-                      ),
-                    ),
                   ),
                 ),
 
@@ -155,10 +168,14 @@ class _LoginPageState extends State<LoginPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Text('Don\'t have an account yet? ', style: TextStyle(fontSize: 18),),
+                      Text(
+                        'Don\'t have an account yet? ',
+                        style: TextStyle(fontSize: 18),
+                      ),
                       Text(
                         'Sign up',
-                        style: TextStyle(fontSize: 18.0,
+                        style: TextStyle(
+                            fontSize: 18.0,
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold),
                       )

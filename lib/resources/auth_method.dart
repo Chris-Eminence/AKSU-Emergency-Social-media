@@ -80,7 +80,6 @@ class AuthenticationClass {
     return result;
   }
 
-
 /*
 Login in the user
  */
@@ -97,7 +96,14 @@ Login in the user
       }else{
         result = "Email or Password cannot be blank";
       }
-    } catch (error) {
+    } on FirebaseAuthException catch (auth_error) {
+      if (auth_error.code == 'wrong-password') {
+        result = 'Password is Wrong';
+      }else if(auth_error.code == 'user-not-found'){
+        result = 'User not found on the database';
+      }
+    }
+        catch (error) {
         error.toString();
     }
     return result;
