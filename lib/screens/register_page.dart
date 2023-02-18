@@ -81,6 +81,14 @@ class _RegisterPageState extends State<RegisterPage> {
     // );
   }
 
+  void gotoLoginPage() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const LoginPage(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -281,14 +289,19 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('Already have an account? '),
-                      Text(
-                        'Login',
-                        style: TextStyle(
+                    children:  [
+                      const Text('Already have an account? ',
+                      style: TextStyle(fontSize: 18),),
+                      GestureDetector(
+                        onTap: gotoLoginPage,
+                        child: const Text(
+                          'Sign up',
+                          style: TextStyle(
+                            fontSize: 18.0,
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.bold),
-                      )
+                        ),
+                      ),
                     ],
                   ),
                 ),

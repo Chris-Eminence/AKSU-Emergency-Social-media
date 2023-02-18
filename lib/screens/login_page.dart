@@ -1,3 +1,5 @@
+
+
 import 'package:aksustack/screens/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +28,15 @@ class _LoginPageState extends State<LoginPage> {
     _emailAddressTextController.dispose();
     _passwordTextController.dispose();
   }
+
+  void gotoRegisterPage() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const RegisterPage(),
+      ),
+    );
+  }
+
 
   void loginUser() async {
     setState(() {
@@ -129,6 +140,9 @@ class _LoginPageState extends State<LoginPage> {
                   height: 60.0,
                 ),
 
+                /*
+                Sign Up button
+                 */
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: SizedBox(
@@ -167,18 +181,21 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         'Don\'t have an account yet? ',
                         style: TextStyle(fontSize: 18),
                       ),
-                      Text(
-                        'Sign up',
-                        style: TextStyle(
-                            fontSize: 18.0,
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.bold),
-                      )
+                      GestureDetector(
+                        onTap: gotoRegisterPage,
+                        child: const Text(
+                          'Sign up',
+                          style: TextStyle(
+                              fontSize: 18.0,
+                              color: AppColors.primaryColor,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ],
                   ),
                 ),
