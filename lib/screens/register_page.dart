@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 import 'package:aksustack/resources/auth_method.dart';
+import 'package:aksustack/screens/home_page.dart';
 import 'package:aksustack/utils/image_utils.dart';
 import 'package:aksustack/utils/project_colors.dart';
 import 'package:aksustack/drop_down_spinners/department_drop_down_list/department_list.dart';
@@ -70,7 +71,11 @@ class _RegisterPageState extends State<RegisterPage> {
     if (result != 'success') {
       showSnackBar(result, context);
     } else {
-      //
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Homepage(),
+          ));
     }
 
     // Navigator.push(
@@ -81,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
     // );
   }
 
-  void gotoLoginPage() {
+  void navigateToLoginPage() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const LoginPage(),
@@ -293,7 +298,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       const Text('Already have an account? ',
                       style: TextStyle(fontSize: 18),),
                       GestureDetector(
-                        onTap: gotoLoginPage,
+                        onTap: navigateToLoginPage,
                         child: const Text(
                           'Sign up',
                           style: TextStyle(

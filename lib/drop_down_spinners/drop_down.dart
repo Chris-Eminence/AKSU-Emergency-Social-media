@@ -20,6 +20,7 @@ class _DropDownState extends State<DropDown> {
     'Chemistry Education',
     'Biology Education',
     'Marine Biology',
+    'Marine Biology',
     'Genetics & Biotechnology',
     'Civil Engineering',
     'Micro Biology',

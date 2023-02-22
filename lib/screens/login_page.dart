@@ -1,5 +1,3 @@
-
-
 import 'package:aksustack/screens/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,14 +27,13 @@ class _LoginPageState extends State<LoginPage> {
     _passwordTextController.dispose();
   }
 
-  void gotoRegisterPage() {
+  void navigateToRegisterPage() {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const RegisterPage(),
       ),
     );
   }
-
 
   void loginUser() async {
     setState(() {
@@ -46,9 +43,17 @@ class _LoginPageState extends State<LoginPage> {
         email: _emailAddressTextController.text,
         password: _passwordTextController.text);
 
-    if (result == "success") {
+    if (result == 'success') {
+      print('if result is: $result');
+      print('else result is: $result');
     } else {
-      showSnackBar(result, context);
+      //
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Homepage(),
+        ),
+      );
     }
     setState(() {
       _isLoading = false;
@@ -187,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(fontSize: 18),
                       ),
                       GestureDetector(
-                        onTap: gotoRegisterPage,
+                        onTap: navigateToRegisterPage,
                         child: const Text(
                           'Sign up',
                           style: TextStyle(
