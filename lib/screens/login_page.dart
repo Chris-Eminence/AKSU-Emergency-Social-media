@@ -1,11 +1,13 @@
+import 'package:aksustack/features/authentication/controllers/login_page_controller.dart';
+import 'package:aksustack/repository/authentication_repo/authenticstion_repo.dart';
+import 'package:aksustack/screens/forget_password/forget_password_mail/forget_password_with_mail.dart';
 import 'package:aksustack/screens/home_page.dart';
+import 'package:aksustack/utils/widgets/input_form_field.dart';
+import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../resources/auth_method.dart';
-import '../utils/image_utils.dart';
 import '../utils/project_colors.dart';
-import '../drop_down_spinners/drop_down.dart';
-import '../utils/widgets/text_input_field.dart';
+import 'forget_password/forgot_password_options/forgot_password_btn_widget.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,15 +19,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailAddressTextController = TextEditingController();
-
-  @override
-  void dispose() {
-    super.dispose();
-    _emailAddressTextController.dispose();
-    _passwordTextController.dispose();
-  }
 
   void navigateToRegisterPage() {
     Navigator.of(context).push(
@@ -35,33 +28,11 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void loginUser() async {
-    setState(() {
-      _isLoading = true;
-    });
-    String result = await AuthenticationClass().loginUser(
-        email: _emailAddressTextController.text,
-        password: _passwordTextController.text);
-
-    if (result == 'success') {
-      print('if result is: $result');
-      print('else result is: $result');
-    } else {
-      //
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Homepage(),
-        ),
-      );
-    }
-    setState(() {
-      _isLoading = false;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(LoginInPageController());
+    final _formKey = GlobalKey<FormState>();
+
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
     Size size = MediaQuery.of(context).size;
@@ -109,15 +80,12 @@ class _LoginPageState extends State<LoginPage> {
                 */
 
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextInputWidget(
-                      textEditingController: _emailAddressTextController,
-                      hintText: 'Email address',
-                      prefixIcon: const Icon(
-                        Icons.email,
-                        color: AppColors.primaryColor,
-                      ),
-                      textInputType: TextInputType.emailAddress),
+                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+                  child: InputTextFormFields(
+                    controller: controller.email,
+                    label: 'Email address',
+                    prefixIcon: Icons.email,
+                  ),
                 ),
                 SizedBox(
                   height: size.height * 0.02,
@@ -128,21 +96,108 @@ class _LoginPageState extends State<LoginPage> {
                 */
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextInputWidget(
-                    obscureText: true,
-                    textEditingController: _passwordTextController,
-                    hintText: 'password',
-                    prefixIcon: const Icon(
-                      Icons.password,
-                      color: AppColors.primaryColor,
-                    ),
-                    suffixIcon: const Icon(Icons.visibility),
-                    textInputType: TextInputType.visiblePassword,
+                  child: InputTextFormFields(
+                    controller: controller.password,
+                    label: 'Password',
+                    prefixIcon: Icons.password,
+                    suffixIcon: Icons.visibility,
                   ),
+                ),
+                const SizedBox(
+                  height: 5.0,
+                ),
+
+                /*
+                FORGOT PASSWORD
+                 */
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 30.0),
+                      child: TextButton(
+                        onPressed: () {
+                          /*
+                          SHOW BOTTOM MODAL SHEET
+                           */
+
+                          showModalBottomSheet(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            context: context,
+                            builder: (context) => Container(
+                              padding: const EdgeInsets.all(30),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Make a selection...',
+                                    style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.primaryColor,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  const Text(
+                                    'Select how you want to reset your password',
+                                    style: TextStyle(
+                                        color: AppColors.secondaryColor,
+                                        fontSize: 18),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+
+                                  /*
+                                  CLICKABLE CONTAINER OPTIONS
+                                   */
+
+                                  //EMAIL OPTION
+                                  forget_password_button(
+                                      icon: Icons.email_outlined,
+                                      title: 'E-mail',
+                                      subtitle:
+                                          'Reset password with E-mail Verification',
+                                      onTap: () {
+                                        Get.to(() => ForgetPasswordWithMail());
+                                      }),
+                                  // PHONE NUMBER OPTION
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  forget_password_button(
+                                    icon: Icons.phone_enabled,
+                                    title: 'Phone Number',
+                                    subtitle:
+                                        'Reset password with Phone Number Verification',
+                                    onTap: () {},
+                                  ),
+
+                                  //
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Forgot password?',
+                          style: TextStyle(
+                              color: AppColors.primaryColor, fontSize: 18),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
 
                 const SizedBox(
-                  height: 60.0,
+                  height: 10.0,
                 ),
 
                 /*
@@ -160,7 +215,13 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           )
                         : TextButton(
-                            onPressed: loginUser,
+                            onPressed: () {
+                              // Get.to(() => const Homepage());
+                              AuthenticationRepository.instance
+                                  .loginUserWithEmailAndPassword(
+                                      controller.email.text.trim(),
+                                      controller.password.text.trim());
+                            },
                             style: ButtonStyle(
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(

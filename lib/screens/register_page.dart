@@ -1,14 +1,14 @@
-import 'dart:typed_data';
-import 'package:aksustack/resources/auth_method.dart';
-import 'package:aksustack/screens/home_page.dart';
-import 'package:aksustack/utils/image_utils.dart';
+import 'dart:ffi';
+
+import 'package:aksustack/features/authentication/controllers/register_page_controller.dart';
+import 'package:aksustack/screens/forget_password/forget_password_otp/otp_screen.dart';
 import 'package:aksustack/utils/project_colors.dart';
-import 'package:aksustack/drop_down_spinners/department_drop_down_list/department_list.dart';
-import 'package:aksustack/drop_down_spinners/drop_down.dart';
-import 'package:aksustack/screens/login_page.dart';
-import 'package:aksustack/utils/widgets/text_input_field.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../utils/widgets/input_form_field.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -17,300 +17,147 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-/*
-  Storing the department item to firebase and also confirm password feature
- */
-
 class _RegisterPageState extends State<RegisterPage> {
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailAddressTextController = TextEditingController();
-  TextEditingController _phoneNumberTextController = TextEditingController();
-  TextEditingController _fullNameTextController = TextEditingController();
-  TextEditingController _confirmPasswordTextController = TextEditingController();
-  TextEditingController _regNoTextController = TextEditingController();
-  Uint8List? _profileImage;
-  bool _isLoading = false;
-
-  // Str ing? departmentsDropdownValue;
-
-  @override
-  void dispose() {
-    super.dispose();
-    _emailAddressTextController.dispose();
-    _fullNameTextController.dispose();
-    _passwordTextController.dispose();
-    _phoneNumberTextController.dispose();
-    _regNoTextController.dispose();
-    _confirmPasswordTextController.dispose();
-  }
-
-  void selectImage() async {
-    Uint8List image = await pickImage(ImageSource.gallery);
-
-    setState(() {
-      _profileImage = image;
-    });
-  }
-
-  void registerUser() async {
-    setState(() {
-      _isLoading = true;
-    });
-    String result = await AuthenticationClass().registerUser(
-      fullName: _fullNameTextController.text,
-      regNo: _regNoTextController.text,
-      emailAddress: _emailAddressTextController.text,
-      phoneNumber: _phoneNumberTextController.text,
-      password: _passwordTextController.text,
-      file: _profileImage!,
-      // department: departmentsDropdownValue!,
-    );
-    setState(() {
-      _isLoading = false;
-    });
-    if (result != 'success') {
-      showSnackBar(result, context);
-    } else {
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Homepage(),
-          ));
-    }
-
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => const LoginPage(),
-    //   ),
-    // );
-  }
-
-  void navigateToLoginPage() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const LoginPage(),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
-
-    Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
+    final controller = Get.put(RegisterPageController());
+    final _formKey = GlobalKey<FormState>();
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Stack(
-                  children: [
-                    _profileImage != null
-                        ? CircleAvatar(
-                            radius: 64,
-                            backgroundColor: AppColors.white,
-                            backgroundImage: MemoryImage(_profileImage!))
-                        : const CircleAvatar(
-                            radius: 64,
-                            backgroundColor: AppColors.white,
-                            backgroundImage: NetworkImage(
-                                'https://winaero.com/blog/wp-content/uploads/2018/08/Windows-10-user-icon-big.png'),
-                          ),
-                    Positioned(
-                      bottom: 0,
-                      left: 90,
-                      child: IconButton(
-                        onPressed: selectImage,
-                        icon: const Icon(
-                          Icons.add_a_photo,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 10.0),
-                  child: Text(
+            child: Container(
+              padding: const EdgeInsets.all(30),
+              child: Column(
+                children: [
+                  Text(
                     'Register',
-                    style: TextStyle(
+                    style: GoogleFonts.nunito(
                       fontWeight: FontWeight.bold,
-                      fontSize: 26.0,
+                      fontSize: 30,
                       color: AppColors.primaryColor,
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 50.0,
-                ),
-                // Image.asset(
-                //   'images/login.png',
-                //   height: 300.0,
-                //   width: 300.0,
-                // ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 40),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // fullName Input TextFields
+                          InputTextFormFields(
+                            controller: controller.fullname,
+                            label: 'Enter full name',
+                            prefixIcon: Icons.person,
+                          ),
 
-                //-- full name textField --
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextInputWidget(
-                      textEditingController: _fullNameTextController,
-                      hintText: 'Full name',
-                      prefixIcon: const Icon(
-                        Icons.person,
-                        color: AppColors.primaryColor,
-                      ),
-                      textInputType: TextInputType.text),
-                ),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
+                          // Email Input TextFields
+                          const SizedBox(height: 15),
+                          InputTextFormFields(
+                            controller: controller.email,
+                            label: 'Enter email address',
+                            prefixIcon: Icons.mail,
+                          ),
 
-                //-- Registraion Number --
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextInputWidget(
-                      textEditingController: _regNoTextController,
-                      hintText: 'Reg number',
-                      prefixIcon: const Icon(
-                        Icons.app_registration,
-                        color: AppColors.primaryColor,
-                      ),
-                      textInputType: TextInputType.text),
-                ),
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
+                          // Email Input TextFields
+                          const SizedBox(height: 15),
+                          InputTextFormFields(
+                            controller: controller.phoneNumber,
+                            label: 'Enter Phone Number',
+                            prefixIcon: Icons.phone,
+                            textInputType: TextInputType.phone,
+                          ),
 
-                // -- Email Text Field
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextInputWidget(
-                      textEditingController: _emailAddressTextController,
-                      hintText: 'Email address',
-                      prefixIcon: const Icon(
-                        Icons.email,
-                        color: AppColors.primaryColor,
-                      ),
-                      textInputType: TextInputType.emailAddress),
-                ),
+                          const SizedBox(height: 15),
+                          InputTextFormFields(
+                            controller: controller.department,
+                            label: 'Enter Department',
+                            prefixIcon: Icons.dashboard_customize,
+                          ),
 
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
+                          const SizedBox(height: 15),
+                          InputTextFormFields(
+                            controller: controller.regNo,
+                            label: 'Enter Registration number',
+                            prefixIcon: Icons.tag,
+                          ),
 
-                //-- Phone Number Text Field  --
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextInputWidget(
-                      textEditingController: _phoneNumberTextController,
-                      hintText: 'phone number',
-                      prefixIcon:
-                          const Icon(Icons.phone, color: AppColors.primaryColor),
-                      textInputType: TextInputType.phone),
-                ),
-
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
-
-                //-- Department DropDown Button --
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 30.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white,
-                    boxShadow: const [
-                      BoxShadow(color: AppColors.primaryColor, spreadRadius: 1),
-                    ],
-                  ),
-                  child: const DropDown(),
-                ),
-
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
-
-                //-- Password Text Field  --
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextInputWidget(
-                    obscureText: true,
-                    textEditingController: _passwordTextController,
-                    hintText: 'password',
-                    prefixIcon: const Icon(
-                      Icons.password,
-                      color: AppColors.primaryColor,
-                    ),
-                    suffixIcon: const Icon(Icons.visibility),
-                    textInputType: TextInputType.visiblePassword,
-                  ),
-                ),
-
-                SizedBox(
-                  height: size.height * 0.02,
-                ),
-
-                //-- Button Widget
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 90.0),
-                  child: SizedBox(
-                    width: size.width,
-                    height: size.height * 0.05,
-                    child: _isLoading
-
-                    //-- Circular progress bar Ternary condition operator
-                        ? const Center(
-                            child: CircularProgressIndicator(
-                              color: AppColors.primaryColor,
-                            ),
-                          )
-                        : TextButton(
-                            onPressed: registerUser,
-                            style: ButtonStyle(
-                              shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(55.0)),
+                          const SizedBox(height: 15),
+                          InputTextFormFields(
+                            controller: controller.password,
+                            label: 'Enter password',
+                            prefixIcon: Icons.password,
+                            obscurePassword: true,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          SizedBox(
+                            height: 50,
+                            width: double.infinity,
+                            child: TextButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  RegisterPageController.instance
+                                      .registerUser(
+                                    controller.email.text.trim(),
+                                    controller.password.text.trim(),
+                                    controller.fullname.text.trim(),
+                                    controller.phoneNumber.text.trim(),
+                                    controller.department.text.trim(),
+                                    controller.regNo.text.trim(),
+                                  );
+                                }
+                                Get.to(() => const OTPScreen());
+                              },
+                              style: ButtonStyle(
+                                  shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0)),
+                                  ),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      const Color(0xFF0E693E))),
+                              child: const Text(
+                                'Register',
+                                style: TextStyle(
+                                    color: AppColors.white, fontSize: 18.0),
                               ),
-                              backgroundColor: MaterialStateProperty.all(
-                                const Color(0xFF0E693E),
-                              ),
-                            ),
-                            child: const Text(
-                              'Register',
-                              style: TextStyle(color: Colors.white),
                             ),
                           ),
-                  ),
-                ),
 
-                const SizedBox(
-                  height: 30,
-                ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  'Already have an account? ',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
 
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:  [
-                      const Text('Already have an account? ',
-                      style: TextStyle(fontSize: 18),),
-                      GestureDetector(
-                        onTap: navigateToLoginPage,
-                        child: const Text(
-                          'Sign up',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            color: AppColors.primaryColor,
-                            fontWeight: FontWeight.bold),
-                        ),
+                                  },
+                                  child: const Text(
+                                    'Login',
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: AppColors.primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-              ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),

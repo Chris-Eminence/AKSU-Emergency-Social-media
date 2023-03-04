@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "780217844897-e675geh1vuvf622ivg0mlecdhqtuvi2j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aksustack",
+            "certificate_hash": "40bb287d973ee127013a0f9def9257172705e15f"
+          }
+        },
+        {
           "client_id": "780217844897-nj7hpu7ochrfnqqsjdg2g90gv70m9kot.apps.googleusercontent.com",
           "client_type": 3
         }

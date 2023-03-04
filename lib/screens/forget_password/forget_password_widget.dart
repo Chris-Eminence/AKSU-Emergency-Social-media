@@ -1,10 +1,22 @@
 import 'package:aksustack/screens/creat_new_password.dart';
 import 'package:flutter/material.dart';
-import '../utils/project_colors.dart';
+import '../../utils/project_colors.dart';
+
+class ForgetPasswordWidget extends StatelessWidget {
+  final String titleText;
+  final String subtitleText;
+  final IconData prefixIcon;
+  final String editTextHint;
+  final VoidCallback onPress;
 
 
-class ForgetPassword extends StatelessWidget {
-  const ForgetPassword({Key? key}) : super(key: key);
+  const ForgetPasswordWidget(
+      {Key? key,
+      required this.titleText,
+      required this.subtitleText,
+      required this.prefixIcon,
+      required this.editTextHint, required this.onPress})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +32,10 @@ class ForgetPassword extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 30.0),
               child: Row(
-                children: const [
+                children: [
                   Text(
-                    'Forgot Password 🗝 ',
-                    style: TextStyle(
+                    titleText,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 30.0,
                       color: AppColors.primaryColor,
@@ -32,16 +44,18 @@ class ForgetPassword extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: screenHeight / 29.4,),
-
-            const Padding(
-              padding: EdgeInsets.only(left: 30.0),
-              child: Text(
-                'Enter your email address to get an OTP \nto reset your password',
-                style: TextStyle(fontSize: 20.0, color: AppColors.black, height: 1.5),
-              ),
+            SizedBox(
+              height: screenHeight / 29.4,
             ),
 
+            Padding(
+              padding: const EdgeInsets.only(left: 30.0),
+              child: Text(
+                subtitleText,
+                style: const TextStyle(
+                    fontSize: 20.0, color: AppColors.black, height: 1.5),
+              ),
+            ),
 
             SizedBox(
               height: screenHeight / 29.43,
@@ -53,11 +67,11 @@ class ForgetPassword extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30.0),
               child: TextField(
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(
-                    Icons.mail,
+                  prefixIcon: Icon(
+                    prefixIcon,
                     color: AppColors.primaryColor,
                   ),
-                  hintText: 'Email address',
+                  hintText: editTextHint,
                   border: OutlineInputBorder(
                     borderSide: const BorderSide(
                         width: 0.0,
@@ -86,21 +100,14 @@ class ForgetPassword extends StatelessWidget {
                 width: screenWidth,
                 height: screenHeight / 14.7,
                 child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CreateNewPassword(),
-                      ),
-                    );
-                  },
+                  onPressed: onPress,
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15.0)),
                       ),
                       backgroundColor:
-                      MaterialStateProperty.all(AppColors.primaryColor)),
+                          MaterialStateProperty.all(AppColors.primaryColor)),
                   child: const Text(
                     'Confirm',
                     style: TextStyle(color: AppColors.white, fontSize: 24.0),
