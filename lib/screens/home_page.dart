@@ -54,134 +54,132 @@ class _HomepageState extends State<Homepage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              // Story Feature container
-              Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: const [
-                      StoryContainer(),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      StoryContainer(),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      StoryContainer(),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      StoryContainer(),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      StoryContainer(),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      StoryContainer(),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      StoryContainer(),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      StoryContainer(),
-                    ],
-                  ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // Story Feature container
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30.0),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: const [
+                    StoryContainer(),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    StoryContainer(),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    StoryContainer(),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    StoryContainer(),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    StoryContainer(),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    StoryContainer(),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    StoryContainer(),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    StoryContainer(),
+                  ],
                 ),
               ),
+            ),
 
-              // What's happening in your campus?
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: Colors.grey.shade200,
-                  ),
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          CircleAvatar(
-                            child: Image.asset('images/tina_up.png'),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text('What\'s happening in your campus?',
-                              style: GoogleFonts.nunito()),
-                        ],
-                      ),
-                      const Icon(
-                        Icons.image,
-                        color: AppColors.primaryColor,
-                      )
-                    ],
-                  ),
+            // What's happening in your campus?
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15.0),
+                  color: Colors.grey.shade200,
                 ),
-              ),
-
-              SizedBox(
-                height: 25,
-              ),
-              const UserLabelHomePage(
-                circleAvatar: 'images/vic.png',
-                userName: 'Hachstacks Tech Community',
-                verifiedBadge: Icons.verified,
-                optionsIcon: Icons.more_vert,
-              ),
-
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30.0),
-                    child: Text('Lorem ipsum'),
-                  ),
-                  Container(
-                      child: Image.asset(
-                    'images/hachstacks.png',
-                    fit: BoxFit.contain,
-                  )),
-                  SizedBox(height: 10,),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                    child: Row(
-                      children: const [
-                        Icon(Icons.thumb_up_alt_outlined, color: AppColors.primaryColor, size: 18,),
-                        SizedBox(width: 10,),
-                        Icon(Icons.reply_all_sharp, color: AppColors.primaryColor, size: 18),
-
-                        SizedBox(width: 10,),
-                        Icon(Icons.mode_comment, color: AppColors.primaryColor, size: 18)
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          child: Image.asset('images/tina_up.png'),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text('What\'s happening in your campus?',
+                            style: GoogleFonts.nunito()),
                       ],
                     ),
-                  ),
-                ],
-              ),
-
-              GestureDetector(
-                child: Text(
-                  'Homepage still under development',
-                  style: TextStyle(fontSize: 30.0, color: Colors.grey.shade300),
+                    const Icon(
+                      Icons.image,
+                      color: AppColors.primaryColor,
+                    )
+                  ],
                 ),
-                onDoubleTap: () {
-                  AuthenticationRepository().logout();
-                },
               ),
-            ],
-          ),
+            ),
+
+            const SizedBox(
+              height: 25,
+            ),
+            const UserLabelHomePage(
+              circleAvatar: 'images/vic.png',
+              userName: 'Hachstacks Tech Community',
+              verifiedBadge: Icons.verified,
+              optionsIcon: Icons.more_vert,
+            ),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Text('Lorem ipsum'),
+                ),
+                Container(
+                    child: Image.asset(
+                  'images/hachstacks.png',
+                  fit: BoxFit.contain,
+                )),
+                SizedBox(height: 10,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Row(
+                    children: const [
+                      Icon(Icons.thumb_up_alt_outlined, color: AppColors.primaryColor, size: 18,),
+                      SizedBox(width: 10,),
+                      Icon(Icons.reply_all_sharp, color: AppColors.primaryColor, size: 18),
+
+                      SizedBox(width: 10,),
+                      Icon(Icons.mode_comment, color: AppColors.primaryColor, size: 18)
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+            GestureDetector(
+              child: Text(
+                'Homepage still under development',
+                style: TextStyle(fontSize: 30.0, color: Colors.grey.shade300),
+              ),
+              onDoubleTap: () {
+                AuthenticationRepository().logout();
+              },
+            ),
+          ],
         ),
       ),
     );
