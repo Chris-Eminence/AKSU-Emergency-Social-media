@@ -1,5 +1,6 @@
 import 'package:aksustack/repository/authentication_repo/authenticstion_repo.dart';
 import 'package:aksustack/screens/forget_password/forget_password_otp/otp_screen.dart';
+import 'package:aksustack/screens/profile_screens/personal_info.dart';
 import 'package:aksustack/screens/register_page.dart';
 import 'package:aksustack/screens/splash_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Fiddle',
       theme: ThemeData(),
-      home: const SplashScreen(),
+      home: const PersonalInfo(),
     );
   }
 }
