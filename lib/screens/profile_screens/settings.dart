@@ -1,11 +1,15 @@
+import 'package:aksustack/screens/frequently_ask_quest.dart';
+import 'package:aksustack/screens/profile_screens/profile_screen.dart';
 import 'package:aksustack/utils/project_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../utils/widgets/personal_info_widget.dart';
 
-class PersonalInfo extends StatelessWidget {
-  const PersonalInfo({Key? key}) : super(key: key);
+class SettingsScreens extends StatelessWidget {
+  const SettingsScreens({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +33,13 @@ class PersonalInfo extends StatelessWidget {
                 personal info button
                  */
                 const SizedBox(height: 20,),
-                 const PersonalInfoNavWidget(
+                PersonalInfoNavWidget(
                   firstIcon: Icons.person,
                   label: 'Personal Info',
                   endIcon: Icons.navigate_next,
+                   onTap: (){
+                     Get.to(() => const ProfileScreen());
+                   },
 
                 ),
 
@@ -59,10 +66,11 @@ class PersonalInfo extends StatelessWidget {
                 /*
                 FAQ button
                  */
-                const PersonalInfoNavWidget(
+                PersonalInfoNavWidget(
                   firstIcon: Icons.question_answer_outlined,
                   label: 'FAQ',
                   endIcon: Icons.navigate_next,
+                  onTap: (){Get.to(() => const FrequentlyAskedQuestions()); }
 
                 ),
 

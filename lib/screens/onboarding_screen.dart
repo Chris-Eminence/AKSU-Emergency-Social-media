@@ -1,5 +1,5 @@
 
-import 'package:aksustack/screens/profile_screens/personal_info.dart';
+import 'package:aksustack/screens/profile_screens/settings.dart';
 import 'package:aksustack/screens/splash_screen/final_splash_screen.dart';
 import 'package:aksustack/screens/splash_screen/first_splash_screen.dart';
 import 'package:aksustack/screens/splash_screen/second_splash_screen.dart';
@@ -102,7 +102,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 InkWell(
                   onTap: () {
                     if (activePage == pages.length - 1) {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PersonalInfo()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => FinalSplashScreen()));
                     } else {
                       _pageController.nextPage(duration: Duration(milliseconds: 800), curve: Curves.easeInOutQuint);
                     }

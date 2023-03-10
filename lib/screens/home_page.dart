@@ -1,7 +1,10 @@
 import 'package:aksustack/repository/authentication_repo/authenticstion_repo.dart';
+import 'package:aksustack/screens/profile_screens/profile_screen.dart';
+import 'package:aksustack/screens/profile_screens/settings.dart';
 import 'package:aksustack/utils/project_colors.dart';
 import 'package:aksustack/utils/widgets/user_label_homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../utils/widgets/story_container.dart';
@@ -26,24 +29,26 @@ class _HomepageState extends State<Homepage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 30),
             child: Row(
-              children: const [
-                Icon(
-                  Icons.search,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.person,
                   size: 18,
                   color: AppColors.primaryColor,
+                  ),
+                  onPressed: () { Get.to(() => const ProfileScreen()); },
                 ),
-                SizedBox(
+
+                IconButton(
+                  icon: const Icon(Icons.settings,
+                    size: 18,
+                    color: AppColors.primaryColor,
+                  ),
+                  onPressed: () { Get.to(() => const SettingsScreens(),); },
+                ),
+                const SizedBox(
                   width: 15,
                 ),
-                Icon(
-                  Icons.notification_important_sharp,
-                  size: 18,
-                  color: AppColors.primaryColor,
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Icon(
+                const Icon(
                   Icons.send,
                   size: 18,
                   color: AppColors.primaryColor,
@@ -106,7 +111,7 @@ class _HomepageState extends State<Homepage> {
                   borderRadius: BorderRadius.circular(15.0),
                   color: Colors.grey.shade200,
                 ),
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -153,7 +158,7 @@ class _HomepageState extends State<Homepage> {
                   'images/hachstacks.png',
                   fit: BoxFit.contain,
                 )),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: Row(
