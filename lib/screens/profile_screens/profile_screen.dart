@@ -89,7 +89,7 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(
                             height: 0,
                           ),
-                          userDetailsWidget(
+                          UserDetailsWidget(
                             title: 'Name',
                             body: 'Username Here',
                           ),
@@ -99,7 +99,7 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          userDetailsWidget(
+                          UserDetailsWidget(
                             title: 'Bio',
                             body:
                                 'I know a lot of people face challenges that may require them coming over to find solace with you, but you know what, don\'t let someone that\'s sinking to take you along. Stay safe first before stretching.',
@@ -110,7 +110,7 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          userDetailsWidget(
+                          UserDetailsWidget(
                             title: 'Date of birth',
                             body: '11 - 11 - 2011',
                           ),
@@ -121,7 +121,7 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          userDetailsWidget(
+                          UserDetailsWidget(
                             title: 'Campus',
                             body: 'Campus here',
                           ),
@@ -131,7 +131,7 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          userDetailsWidget(
+                          UserDetailsWidget(
                             title: 'Department',
                             body: 'Department here',
                           ),
@@ -141,7 +141,7 @@ class ProfileScreen extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          userDetailsWidget(
+                          UserDetailsWidget(
                             title: 'Gender',
                             body: 'Male',
                           ),

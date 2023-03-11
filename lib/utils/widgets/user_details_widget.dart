@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../project_colors.dart';
 
-class userDetailsWidget extends StatelessWidget {
+class UserDetailsWidget extends StatelessWidget {
   final String title;
   final String body;
 
-  const userDetailsWidget({
+  const UserDetailsWidget({
     super.key, required this.title, required this.body,
   });
 

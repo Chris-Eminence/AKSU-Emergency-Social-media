@@ -1,3 +1,4 @@
+import 'package:aksustack/screens/contact_us.dart';
 import 'package:aksustack/screens/frequently_ask_quest.dart';
 import 'package:aksustack/screens/profile_screens/profile_screen.dart';
 import 'package:aksustack/utils/project_colors.dart';
@@ -77,9 +78,10 @@ class SettingsScreens extends StatelessWidget {
                 /*
                 contact us button
                  */
-                const PersonalInfoNavWidget(
+                 PersonalInfoNavWidget(
                   firstIcon: Icons.contact_page,
                   label: 'Contact Us',
+                  onTap: (){Get.to(() => const ContactUs()); },
                   endIcon: Icons.navigate_next,
 
                 ),
