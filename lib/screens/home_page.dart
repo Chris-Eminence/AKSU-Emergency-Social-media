@@ -1,4 +1,5 @@
 import 'package:aksustack/repository/authentication_repo/authenticstion_repo.dart';
+import 'package:aksustack/screens/emergency_form.dart';
 import 'package:aksustack/screens/profile_screens/profile_screen.dart';
 import 'package:aksustack/screens/profile_screens/settings.dart';
 import 'package:aksustack/utils/project_colors.dart';
@@ -20,6 +21,20 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: GestureDetector(
+        onDoubleTap: (){
+          print(' this has been doubled tapped');
+        },
+        child: FloatingActionButton(
+          onPressed: () {
+            // Add your code here to define what should happen when the FAB is pressed.
+            print('this is a single tap');
+            Get.to(() => EmergencyForm());
+          },
+          backgroundColor: Colors.blue,
+          child: Image.asset('images/fab.png'),
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: AppColors.white,
         title: Text('Hachstacks',
