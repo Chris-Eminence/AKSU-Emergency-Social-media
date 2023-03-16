@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:aksustack/utils/project_colors.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
 
 class EmergencyForm extends StatefulWidget {
@@ -11,12 +16,85 @@ class EmergencyForm extends StatefulWidget {
 }
 
 class _EmergencyFormState extends State<EmergencyForm> {
+
+  void sendNotificationToAllUsers() async {
+    String serverToken = 'key=AAAAtaibhKE:APA91bF0uWO2Y_y9rmvyZ4cCwFms0wMxv7gCCcMarMNpZg79ujTrQO3NMzCxm-YvtmLNX3wXN4WBgAUTHe7KIoTSuWgzTSEEby7IKEofPqXCipHpGKG0daoZpDWaXorIuER2EvYt3uhD';
+
+    // Replace with your own notification payload
+    var notification = {
+      'notification': {
+        'title': typesOfEmergencyValue,
+        'body': locationSelectedValue
+      },
+      'data': {
+        'click_action': 'FLUTTER_NOTIFICATION_CLICK',
+
+      },
+      'topic': 'all_users'
+    };
+
+    // Send the notification to FCM
+    var response = await http.post(
+      Uri.parse('https://fcm.googleapis.com/fcm/send'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'key=$serverToken'
+      },
+      body: jsonEncode(notification),
+    );
+
+    if (response.statusCode == 200) {
+      // Notification sent successfully
+    } else {
+      // Error sending notification
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      String? title = message.notification!.title;
+      String? body = message.notification!.body;
+      AwesomeNotifications().createNotification(
+        content: NotificationContent(
+          id: 123,
+          channelKey: "call_channel",
+          color: Colors.white,
+          body: body,
+          title: title,
+          category: NotificationCategory.Call,
+          wakeUpScreen: true,
+          fullScreenIntent: true,
+          backgroundColor: AppColors.primaryColor,
+        ),
+        actionButtons: [
+          NotificationActionButton(
+            key: "VIEW",
+            label: "View Emergency",
+            autoDismissible: false,
+            color: Colors.greenAccent,
+          ),
+        ],
+      );
+      AwesomeNotifications().actionStream.listen((event) {
+        print("Notification Registered");
+
+
+      });
+    });
+  }
+
   String? locationSelectedValue = 'Ikot Akpaden';
   String? typesOfEmergencyValue = 'Accident';
   String? descriptionText;
 
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.white,
@@ -51,7 +129,6 @@ class _EmergencyFormState extends State<EmergencyForm> {
               const SizedBox(
                 height: 30,
               ),
-
               /*
               Type of emergency container
                */
@@ -225,9 +302,15 @@ class _EmergencyFormState extends State<EmergencyForm> {
                   ],
                 ),
                 child: GestureDetector(
-                  onTap: () {
+                  onTap: () async {
+                    sendNotificationToAllUsers();
+
+                    sendPushNotification();
+                    String? tokenForNotification =
+                        await FirebaseMessaging.instance.getToken();
+
                     print(
-                        'location is: $locationSelectedValue and the kind of emergency is: $typesOfEmergencyValue, here is the description: $descriptionText');
+                        'location is: $locationSelectedValue and the kind of emergency is: $typesOfEmergencyValue, here is the description: $descriptionText \n token is: $tokenForNotification`');
                   },
                   child: Center(
                     child: Padding(
@@ -245,5 +328,36 @@ class _EmergencyFormState extends State<EmergencyForm> {
         ),
       ),
     );
+  }
+
+  Future<void> sendPushNotification() async {
+    try {
+      http.Response response = await http.post(
+        Uri.parse('https://fcm.googleapis.com/fcm/send'),
+        headers: <String, String>{
+          'Content-type' : 'application/json; charset=UTF-8',
+          'Authorization' : 'key=AAAAtaibhKE:APA91bF0uWO2Y_y9rmvyZ4cCwFms0wMxv7gCCcMarMNpZg79ujTrQO3NMzCxm-YvtmLNX3wXN4WBgAUTHe7KIoTSuWgzTSEEby7IKEofPqXCipHpGKG0daoZpDWaXorIuER2EvYt3uhD',
+        },
+        body: jsonEncode(
+          <String, dynamic>{
+            'notification' : <String, dynamic>{
+              'body' : locationSelectedValue,
+              'title' : typesOfEmergencyValue,
+            },
+            'priority' : 'high',
+            'data' : <String, dynamic>{
+              'click_action' : 'FLUTTER_NOTIFICATION_CLICK',
+              'id' : '1',
+              'status' : 'done'
+            },
+            'to' : 'dbb9L3QXQze1e_ExOoooSF:APA91bFm2ZdkCyx75_pP1152wGwOCa1akU-5n7unAta089ZafFetjIyGE3T1bn-a6pnqCw9ucIdxtJdsu0C3WSoyyyA5bp0F6Nmi6qPnfFSb5avb-D3N9gjfeVWe8Hady0Rd0IYBxIZ3',
+          }
+        )
+
+      );
+      response;
+    }catch(e){
+      e;
+    }
   }
 }
