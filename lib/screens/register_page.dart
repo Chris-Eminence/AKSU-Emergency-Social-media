@@ -60,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             prefixIcon: Icons.mail,
                           ),
 
-                          // Email Input TextFields
+                          // Email Input TextField
                           const SizedBox(height: 15),
                           InputTextFormFields(
                             controller: controller.phoneNumber,

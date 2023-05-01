@@ -36,7 +36,7 @@ class ThirdSplashScreen extends StatelessWidget {
                         ),
                         const Text(
                           'on the go',
-                          style: const TextStyle(
+                          style: TextStyle(
                               color: AppColors.secondaryColor,
                               fontSize: 36.0,
                               fontWeight: FontWeight.w500),

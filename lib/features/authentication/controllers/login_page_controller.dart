@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../repository/authentication_repo/authenticstion_repo.dart';
 
 class LoginInPageController extends GetxController{

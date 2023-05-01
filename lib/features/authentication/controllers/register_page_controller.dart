@@ -32,6 +32,6 @@ class RegisterPageController extends GetxController {
   // Get Phone number from user and pass it to auth repository for authentication
   // void phoneAuthentication(String phoneNumber) {
   //   AuthenticationRepository.instance.phoneNumberAuthentication(phoneNumber);
-  //
+
   // }
 }

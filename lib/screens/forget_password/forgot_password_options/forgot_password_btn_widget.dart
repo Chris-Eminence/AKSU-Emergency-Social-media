@@ -36,8 +36,7 @@ class forget_password_button extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontWeight: FontWeight.bold, fontSize: 20,
                 ),
               ),
               Text(

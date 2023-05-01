@@ -93,7 +93,7 @@ class CreateNewPassword extends StatelessWidget {
                     Icons.visibility,
                     color: AppColors.primaryColor,
                   ),
-                  hintText: 'Comfirm your password',
+                  hintText: 'Confirm your password',
                   border: OutlineInputBorder(
                     borderSide: const BorderSide(
                         width: 0.0,
@@ -107,7 +107,7 @@ class CreateNewPassword extends StatelessWidget {
               ),
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 60.0,
             ),
 
@@ -121,7 +121,7 @@ class CreateNewPassword extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Homepage(),
+                        builder: (context) => const Homepage(),
                       ),
                     );
                   },

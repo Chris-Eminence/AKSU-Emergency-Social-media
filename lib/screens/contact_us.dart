@@ -72,7 +72,7 @@ class ContactUs extends StatelessWidget {
                */
               ContactUsWidget(text: 'Instagram', onTap: (){}),
 
-              SizedBox(height: 50,),
+              const SizedBox(height: 50,),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: const [

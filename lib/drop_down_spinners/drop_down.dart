@@ -9,11 +9,9 @@ class DropDown extends StatefulWidget {
 }
 
 class _DropDownState extends State<DropDown> {
-  String? departmentsDropdownValue ;
+  String? departmentsDropdownValue;
 
-
-  List <String> spinnerItems = [
-
+  List<String> spinnerItems = [
     'Mechanical Engineering',
     'Physics Education',
     'Chemistry Education',
@@ -25,49 +23,44 @@ class _DropDownState extends State<DropDown> {
     'Micro Biology',
     'Social Science',
     'Political Science'
-
-  ] ;
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Row(
-
-
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 10.0),
-            child: Icon(
-              Icons.school, color: AppColors.primaryColor,
-            ),
-          ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-
-        child: DropdownButton(
-          hint: const Text('Select your department'),
-          iconEnabledColor: Colors.white,
-          value: departmentsDropdownValue,
-          style: const TextStyle(color: AppColors.primaryColor, fontSize: 16),
-          underline: Container(
-
-            height: 0,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: Icon(
+            Icons.school,
             color: AppColors.primaryColor,
           ),
-          onChanged: (data) {
-            setState(() {
-              departmentsDropdownValue = data.toString();
-            });
-          },
-          items: spinnerItems.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
         ),
-      ),
-
-
-    ]);
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: DropdownButton(
+            hint: const Text('Select your department'),
+            iconEnabledColor: Colors.white,
+            value: departmentsDropdownValue,
+            style: const TextStyle(color: AppColors.primaryColor, fontSize: 16),
+            underline: Container(
+              height: 0,
+              color: AppColors.primaryColor,
+            ),
+            onChanged: (data) {
+              setState(() {
+                departmentsDropdownValue = data.toString();
+              });
+            },
+            items: spinnerItems.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
   }
 }

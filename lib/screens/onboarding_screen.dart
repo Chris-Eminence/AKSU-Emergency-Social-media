@@ -88,11 +88,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List<Widget>.generate(pages.length, (int index) {
                       return AnimatedContainer(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           height: 10,
                           width: (index == activePage) ? 30 : 10,
                           margin:
-                          EdgeInsets.symmetric(horizontal: 5, vertical: 30),
+                          const EdgeInsets.symmetric(horizontal: 5, vertical: 30),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: (index == activePage)
@@ -102,15 +102,15 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                 InkWell(
                   onTap: () {
                     if (activePage == pages.length - 1) {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => FinalSplashScreen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const FinalSplashScreen()));
                     } else {
-                      _pageController.nextPage(duration: Duration(milliseconds: 800), curve: Curves.easeInOutQuint);
+                      _pageController.nextPage(duration: const Duration(milliseconds: 800), curve: Curves.easeInOutQuint);
                     }
                   },
 
                   child: AnimatedContainer(
                     alignment: Alignment.center,
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     height: screenHeight  / 16.9,
                     width: (activePage == (pages.length - 1)) ? 200 : 75,
                     decoration: BoxDecoration(
@@ -130,7 +130,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                   ),
                 ),
 
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
 
               ],
             ),

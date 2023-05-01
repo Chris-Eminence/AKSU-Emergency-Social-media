@@ -96,11 +96,6 @@ class SettingsScreens extends StatelessWidget {
 
                 ),
 
-                /*
-                logout
-                 */
-
-
 
               ],
             ),

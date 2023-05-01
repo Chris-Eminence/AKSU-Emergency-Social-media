@@ -29,7 +29,7 @@ class _HomepageState extends State<Homepage> {
           onPressed: () {
             // Add your code here to define what should happen when the FAB is pressed.
             print('this is a single tap');
-            Get.to(() => EmergencyForm());
+            Get.to(() => const EmergencyForm());
           },
           backgroundColor: Colors.blue,
           child: Image.asset('images/fab.png'),

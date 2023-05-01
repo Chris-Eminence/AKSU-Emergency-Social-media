@@ -18,7 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool _isLoading = false;
+  final bool _isLoading = false;
 
   void navigateToRegisterPage() {
     Navigator.of(context).push(
@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                 */
 
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
                   child: InputTextFormFields(
                     controller: controller.email,
                     label: 'Email address',
@@ -163,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                                       subtitle:
                                           'Reset password with E-mail Verification',
                                       onTap: () {
-                                        Get.to(() => ForgetPasswordWithMail());
+                                        Get.to(() => const ForgetPasswordWithMail());
                                       }),
                                   // PHONE NUMBER OPTION
                                   const SizedBox(

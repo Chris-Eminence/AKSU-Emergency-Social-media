@@ -1,6 +1,4 @@
 import 'package:aksustack/screens/onboarding_screen.dart';
-import 'package:aksustack/screens/register_page.dart';
-import 'package:aksustack/screens/splash_screen/second_splash_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'first_splash_screen.dart';
@@ -17,11 +15,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 2000), () {
+    Future.delayed(const Duration(milliseconds: 2000), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => OnBoardingPage(),
+          builder: (context) => const OnBoardingPage(),
         ),
       );
     });
@@ -45,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     height: 180.0,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20.0,
                 ),
                 const Padding(
@@ -54,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 36.0,
-                        color: const Color(0xFF0E693E),
+                        color: Color(0xFF0E693E),
                       )),
                 ),
                 const Padding(
@@ -63,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 36.0,
-                        color: const Color(0xFF0E693E),
+                        color: Color(0xFF0E693E),
                       )),
                 ),
                 const Padding(

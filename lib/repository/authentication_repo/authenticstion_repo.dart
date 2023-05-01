@@ -83,7 +83,7 @@ class AuthenticationRepository extends GetxController {
 
     );
   }
-
+  /*-- Verify User through phone number --*/
   // VERIFY USER THROUGH PHONE AUTHENTICATION
   // Future<bool> verifyOTP(String otp) async {
   //   var credentials = await _auth.signInWithCredential(PhoneAuthProvider.credential(

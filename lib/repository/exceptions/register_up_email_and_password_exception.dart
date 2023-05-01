@@ -3,7 +3,6 @@ class RegisterEmailAndPasswordFailure {
 
   const RegisterEmailAndPasswordFailure(
       [this.message = "An unknown Error occurred"]);
-
   factory RegisterEmailAndPasswordFailure.code(String code) {
     switch (code) {
       case 'weak-password':

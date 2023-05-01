@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../../utils/project_colors.dart';
 import '../../utils/widgets/user_details_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -21,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     Image.asset('images/profile_cover.png'),
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [

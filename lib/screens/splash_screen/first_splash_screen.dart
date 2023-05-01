@@ -1,4 +1,3 @@
-import 'package:aksustack/utils/dimensions.dart';
 import 'package:aksustack/utils/project_colors.dart';
 import 'package:flutter/material.dart';
 
@@ -29,14 +28,14 @@ class FirstSplashScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Chat & engage',
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: AppColors.black,
                             fontSize: 36.0,
                             fontWeight: FontWeight.w500),
                       ),
                       const Text(
                         'wherever, whenever',
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: AppColors.secondaryColor,
                             fontSize: 36.0,
                             fontWeight: FontWeight.w500),
@@ -67,7 +66,5 @@ class FirstSplashScreen extends StatelessWidget {
             ),
           ),
         );
-
-
   }
 }

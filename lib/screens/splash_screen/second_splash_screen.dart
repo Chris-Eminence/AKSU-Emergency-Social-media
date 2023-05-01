@@ -1,8 +1,4 @@
-
-
-import 'package:aksustack/screens/splash_screen/third_splash_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../../utils/project_colors.dart';
 
 class SecondSplashScreen extends StatelessWidget {
@@ -71,6 +67,5 @@ class SecondSplashScreen extends StatelessWidget {
             ),
           ),
     );
-
   }
 }

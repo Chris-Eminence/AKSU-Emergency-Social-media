@@ -14,7 +14,7 @@ class ForgetPasswordWithMail extends StatelessWidget {
       prefixIcon: Icons.email_outlined,
       editTextHint: 'email address',
       onPress: (){
-        Get.to(() => OTPScreen());
+        Get.to(() => const OTPScreen());
       },
     );
   }

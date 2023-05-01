@@ -90,8 +90,6 @@ class _EmergencyFormState extends State<EmergencyForm> {
   String? typesOfEmergencyValue = 'Accident';
   String? descriptionText;
 
-
-
   @override
   Widget build(BuildContext context) {
 
